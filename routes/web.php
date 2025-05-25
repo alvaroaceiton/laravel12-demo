@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\MenuController as FrontMenuController;
 use App\Http\Controllers\Front\HomeController;
 
 use App\Http\Controllers\Admin\ProductoController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // routes/web.php
@@ -32,7 +33,7 @@ Route::get('/admin', function () {
 
 Route::post('/admin', [LoginController::class, 'login']);
 
-
+Auth::routes();
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/pages', function(){
         return view('admin.pages');
