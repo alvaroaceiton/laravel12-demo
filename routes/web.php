@@ -27,9 +27,8 @@ Route::get('/admin', function () {
     if (Auth::check()) {
         return redirect()->route('admin.home');
     }
-
     return app(LoginController::class)->showLoginForm();
-})->name('login');
+});
 
 Auth::routes();
 Route::prefix('admin')->middleware(['auth'])->group(function () {
