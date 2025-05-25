@@ -31,17 +31,12 @@ Route::get('/admin', function () {
     return app(LoginController::class)->showLoginForm();
 })->name('login');
 
-Route::post('/admin', [LoginController::class, 'login']);
-
 Auth::routes();
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/pages', function(){
         return view('admin.pages');
     });
     Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
-    Route::post('/logout', [LoginController::class, 'logout'])
-    ->name('logout')
-    ->middleware('auth');
     Route::resource('menus', AdminMenuController::class);
     Route::get('menus/{menu}/hijos', [AdminMenuController::class, 'showHijos'])->name('menus.hijos');
     // routes/web.php
