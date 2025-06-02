@@ -30,7 +30,9 @@ Route::get('/admin', function () {
     return app(LoginController::class)->showLoginForm();
 });
 
-Auth::routes();
+Route::prefix('/admin')->group(function () {
+    Auth::routes();
+});
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/pages', function(){
         return view('admin.pages');
